@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { HeaderContent } from "./Composants/HeaderContent"
 import { Todos } from "./Composants/Todos"
-import ModalDetail from "./Composants/ModalDetail";
 
 function App() {
   const [taches, setTaches] = useState([]);
+  const [message, setMessage] = useState("")
 
   // Fonction pour ajouter une tâche
   const handleAddTache = (newTache) => {
@@ -31,7 +31,7 @@ function App() {
       setTaches(updatedTaches);
 
       // Optionnel: Confirmer l'ajout
-      alert("Tâche ajoutée avec succès!");
+      setMessage("Tâche ajoutée avec succès!");
 
     } catch (error) {
       console.error("Erreur lors de l'ajout de la tâche:", error);
@@ -89,7 +89,7 @@ function App() {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
       <h1 className=" text-3xl font-bold mb-10 ">Gestion des tâches</h1>
-      <HeaderContent addTache={handleAddTache} setTaches={setTaches} taches={taches}  />
+      <HeaderContent addTache={handleAddTache} setTaches={setTaches} taches={taches} message={message} />
       <Todos taches={taches} handleDelete={handleDelete} setTaches={setTaches} />
     </div>
   )

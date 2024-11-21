@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 
-const ModalAdd = ({ visible, onClose, addTache }) => {
-   
+const ModalAdd = ({ visible, onClose, addTache, message }) => {
+    const [msg, setMsg] = useState("")
 
     if (!visible) return
 
@@ -18,13 +19,14 @@ const ModalAdd = ({ visible, onClose, addTache }) => {
         }
 
         addTache(newTache);
+        setMsg("Enregistrement reussi")
         // console.log(newTache)
+        setTimeout(() => {
+            setMsg("")  
+        }, 1000)
     }
 
-
-
-
-    return (
+        return (
         <div className="flex justify-center items-center fixed w-screen min-h-screen bg-black bg-opacity-10 backdrop-blur-sm">
         <div className="w-6/12 bg-white text-blue">
             <div className="flex justify-between items-center bg-blue-500 p-5">
@@ -54,6 +56,9 @@ const ModalAdd = ({ visible, onClose, addTache }) => {
                             placeholder="Description" 
                             required 
                         />
+                    </div>
+                    <div className="text-green-500 mb-3 ">
+                        {msg}
                     </div>
                     <button 
                         type="submit" 

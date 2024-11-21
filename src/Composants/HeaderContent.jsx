@@ -3,20 +3,30 @@ import { useEffect, useState } from "react";
 import { VscSearch } from "react-icons/vsc";
 import ModalAdd from "./ModalAdd";
 
-export const HeaderContent = ({addTache,setTaches, taches}) => {
+export const HeaderContent = ({addTache,setTaches, taches, message}) => {
   const [recherche, setRecherche] = useState('');
   const [voirModal, setVoirModal] = useState(false);
 
 // // recherche
-  const tachesFiltrees = taches.filter(tache => 
-    tache.tache.toLowerCase().includes(recherche.toLowerCase()) || 
-    tache.desc.toLowerCase().includes(recherche.toLowerCase())
-);
+//   const tachesFiltrees = taches.filter(tache => 
+//     tache.tache.toLowerCase().includes(recherche.toLowerCase()) || 
+//     tache.desc.toLowerCase().includes(recherche.toLowerCase())
+// );
 
-if(tachesFiltrees){
-  setTaches(tachesFiltrees)
-}
-// setTaches(tachesFiltrees);
+// // Effet pour gérer la recherche
+useEffect(() => {
+  if (recherche) {
+    const filteredTaches = taches.filter(tache => 
+      tache.tache.toLowerCase().includes(recherche.toLowerCase()) || 
+      tache.desc.toLowerCase().includes(recherche.toLowerCase())
+    );
+    setTaches(filteredTaches);
+  } else {
+    const taches = JSON.parse(localStorage.getItem('taches'))
+    setTaches(taches)
+  }
+}, [recherche]); 
+
   // Fonction pour ouvrir/fermer le modal
   const handleOnClose = () => setVoirModal(false)
   const handleOpene = () => setVoirModal(true)
@@ -44,7 +54,7 @@ if(tachesFiltrees){
           </div>
         </div>
       </form>
-      <ModalAdd visible={voirModal} onClose={handleOnClose} addTache={addTache}/>
+      <ModalAdd visible={voirModal} onClose={handleOnClose} addTache={addTache} message={message}/>
     </>
   )
 }

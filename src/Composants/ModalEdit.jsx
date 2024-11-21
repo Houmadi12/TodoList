@@ -46,22 +46,6 @@ const ModalEdit = ({ visible, onClose, tacheSelectionnee, setTaches }) => {
     }, [tacheEdit]);
 
 
-
-    // const handleEdit = (e) => {
-    //     e.preventDefault();
-    //     const taches = JSON.parse(localStorage.getItem("taches"))
-
-    //     taches.map((tache) => {
-    //         if(tache.tache === tacheEdit.newTache && tache.desc === tacheEdit.newDesc){
-    //             alert("Bonjour");
-    //         }else{
-    //             alert("Bondoir")
-    //         }
-    //     })
-    //     onClose(); // Close the modal after editing
-    // };
-
-
     if (!visible) return
     // console.log(newTache)
     return (
